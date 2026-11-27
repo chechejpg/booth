@@ -1,5 +1,8 @@
 'use strict';
-const stage=document.querySelector('#stage'), msg=document.querySelector('#message');let scene,frame=1,stream=null,photos=[],result='',busy=false,epoch=0;const A=n=>'assets/'+encodeURIComponent(n+'.png');const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const stage=document.querySelector('#stage'), msg=document.querySelector('#message');let scene,frame=1,stream=null,photos=[],result='',busy=false,epoch=0;// Cache busting: refresh frame URLs once per page load, preserving reuse within the session.
+const FRAME_CACHE_VERSION=Date.now().toString(36);
+const A=n=>'assets/'+encodeURIComponent(n+'.png')+(n.startsWith('CHECHEBOOTH_FRAMES_')?'?v='+FRAME_CACHE_VERSION:'');
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
 // Film-inspired profiles: saturation, contrast, lift, warmth RGB, grain, hue treatment.
 const recipes=[
  ['B&W'],['COLOR'],['PORTRA 400 V2',.94,.91,8,9,2,-10,5,0],
